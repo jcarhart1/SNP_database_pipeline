@@ -2,7 +2,7 @@
 import urllib3 as urllib
 import zipfile2 as zipfile
 
-# download and unzip
+# download and unzip (wrap in function after testing so that this file can be called with the exe)
 url = 'https://api.pharmgkb.org/v1/download/file/data/clinicalAnnotations.zip'
 filehandle, _ = urllib.urlretrieve(url)
 zip_file_object = zipfile.ZipFile(filehandle, 'r')
