@@ -39,16 +39,17 @@ df_filtered_on_med = (df_filtered_on_loe.loc[df_filtered_on_loe['Drug(s)'].isin(
                                                                                  'sertraline', 'tranylcypromine', 'trazodone',
                                                                                  'trimipramine', 'trimipramine', 'venlafaxine',
                                                                                  'vilazodone', 'vortioxetine'])])
-print(df_filtered_on_med)
+# print(df_filtered_on_med)
 
 # split Variant on ';' to create new row for each variant
-test_df = df_filtered_on_med.Variant.str.split(",").apply(pd.Series, 1).stack()
-test_df.index = test_df.index.droplevel(-1)
-# del df_filtered_on_med['Variant']
-print(test_df)
+test_df = df_filtered_on_med.assign(Variant=df_filtered_on_med.Variant.str.split(",")).explode('Variant')
+# print(test_df)
 
 # remove (i.e., concat the new string) to remove everything before the '*'
+# df_filtered_on_med.Variants = df_filtered_on_med.Variant.split('.')[1].lstrip().split(' ')[0]
+# print(df_filtered_on_med)
 
 # pivot from long to wide on medication names
 
-# test_df.to_csv('C:/Users/jcarhart/Desktop/pharm_gkb_filtered.csv', index=False)
+# df_filtered_on_med.to_csv('C:/Users/jcarhart/Desktop/pharm_gkb_filtered.csv', index=False)
+# test_df.to_csv('C:/Users/jcarhart/Desktop/pharm_gkb_filtered_split.csv', index=False)
