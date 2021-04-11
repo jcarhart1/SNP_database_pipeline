@@ -1,10 +1,10 @@
 # genetika+ pharmGKB db updates sop
 
 --prerequisties     
-1: install python
-2: install pycharm                                  
-3: download github desktop      
-4: configure pycharm with github desktop
+1: install python (would a wiki be helpful?)    
+2: install pycharm (would a wiki be helpful?)                       
+3: download github desktop @ https://desktop.github.com/    
+4: configure pycharm with github desktop (wiki?)
 
 --SOP for pipeline dev and replication  
 1: create python file that queries PharmGKB API to obtain download  
