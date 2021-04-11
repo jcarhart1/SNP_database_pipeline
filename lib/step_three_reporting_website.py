@@ -22,8 +22,9 @@ def generate_table(dataframe, max_rows=1000):
     )
 
 
-app = dash.Dash(__name__)
-
+app = dash.Dash(
+    __name__,
+    external_stylesheets=['https://codepen.io/chriddyp/pen/bWLwgP.css'])
 
 app.layout = html.Div(children=[
     html.H4(children='Genetika+ PharmGKB Database'),
@@ -41,11 +42,11 @@ def display_table(dropdown_value):
     if dropdown_value is None:
         return generate_table(df1)
 
-    dff = df1[df1.gene.str.contains('|'.join(dropdown_value))]
+    dff = df1[df1.gene.str.contains(''.join(dropdown_value))]
     return generate_table(dff)
 
 
-app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
+# app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/JYBPQZ.css"})
 
 if __name__ == '__main__':
     app.run_server(debug=True)
