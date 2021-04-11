@@ -20,7 +20,7 @@ REDSHIFT_PARAMS = {'database': 'genetika',
                    'profile': 'datasci'}
 
 
-def outcomes_analysis_run():
+def pharm_gkb_db_update_run():
     conn = postgres_connection(**REDSHIFT_PARAMS)
 
     # pass columns in df as parameters in pre and post data pull queries
