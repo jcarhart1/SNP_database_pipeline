@@ -8,6 +8,7 @@ from io import BytesIO
 # z = urlopen('https://api.pharmgkb.org/v1/download/file/data/clinicalAnnotations.zip')
 # myzip = ZipFile(BytesIO(z.read())).extract('clinical_annotations.tsv')
 # pd.read_csv(myzip)
+from pandas._libs.reshape import explode
 
 df = pd.read_csv("C:/Users/jcarhart/Desktop/clinical_annotations.tsv", sep='\t')
 print(df)
@@ -17,6 +18,8 @@ print(df)
 # Select the ones you want
 df_abridged = df[['Gene', 'Variant/Haplotypes', 'Level of Evidence', 'Phenotype Category', 'Drug(s)']]
 # print(df_abridged)
+
+df_abridged = df_abridged.rename(columns={'Variant/Haplotypes': 'Variant'}, inplace=False)
 
 df_filtered_on_gene = (df_abridged.loc[df_abridged['Gene'].isin(['CYP2D6', 'CYP2C19', 'HTR2A', 'SLC6A4'])])
 # print(df_filtered_on_gene)
@@ -38,7 +41,11 @@ df_filtered_on_med = (df_filtered_on_loe.loc[df_filtered_on_loe['Drug(s)'].isin(
                                                                                  'vilazodone', 'vortioxetine'])])
 print(df_filtered_on_med)
 
-# split Variant/Haplotypes on ';' to create new row for each variant
+# split Variant on ';' to create new row for each variant
+# test_df = explode(df_filtered_on_med.assign(Variant=df_filtered_on_med.Variant.str.split(',')), 'Variant')
+
 # remove (i.e., concat the new string) to remove everything before the '*'
+
+# pivot from long to wide on medication names
 
 df_filtered_on_med.to_csv('C:/Users/jcarhart/Desktop/pharm_gkb_filtered.csv', index=False)
