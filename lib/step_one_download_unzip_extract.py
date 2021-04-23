@@ -5,6 +5,7 @@ from zipfile import ZipFile
 from io import BytesIO
 # download and unzip (wrap in function after testing so that this file can be called with the exe)
 
+# if download does not work, manually download and proceed starting on line 14
 # z = urlopen('https://api.pharmgkb.org/v1/download/file/data/clinicalAnnotations.zip')
 # myzip = ZipFile(BytesIO(z.read())).extract('clinical_annotations.tsv')
 # pd.read_csv(myzip)
@@ -13,6 +14,11 @@ from pandas._libs.reshape import explode
 df = pd.read_csv("C:/Users/jcarhart/Desktop/clinical_annotations.tsv", sep='\t')
 print(df)
 # extract to local (db next iteration)
+
+
+# this needs to be at the rs number level of granularity
+
+# see if PharmVar is something that we can use in addition to PharmGKB
 
 
 # Select the ones you want
